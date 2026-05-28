@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Predictive Sales Forecast</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Predictive Sales Forecast</h1>
+    <p>Interactive dashboard built from sales_data_sample.csv.</p>
+  </header>
+  <main>
+    <section class="summary-grid">
+      <div class="card">
+        <h2>Data shape</h2>
+        <p><strong>{{ summary.shape[0] }}</strong> rows × <strong>{{ summary.shape[1] }}</strong> columns</p>
+      </div>
+      <div class="card">
+        <h2>Columns</h2>
+        <p>{{ summary.columns | join(', ') }}</p>
+      </div>
+      <div class="card">
+        <h2>Missing values</h2>
+        <ul>
+          {% for column, missing in summary.missing_values.items() %}
+            <li>{{ column }}: {{ missing }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <section class="chart-section">
+      <div class="chart-card">
+        <h2>Monthly Sales Trend</h2>
+        <img src="data:image/png;base64,{{ summary.trend_plot }}" alt="Monthly sales trend" />
+      </div>
+      <div class="chart-card">
+        <h2>Sales Forecast</h2>
+        <img src="data:image/png;base64,{{ summary.forecast_plot }}" alt="Sales forecast" />
+      </div>
+    </section>
+
+    <section class="table-section">
+      <div class="table-card">
+        <h2>Top product lines</h2>
+        <table>
+          <thead><tr><th>Product Line</th><th>Sales</th></tr></thead>
+          <tbody>
+            {% for row in summary.top_products %}
+              <tr><td>{{ row.PRODUCTLINE }}</td><td>{{ row.SALES | round(2) }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="table-card">
+        <h2>Top countries</h2>
+        <table>
+          <thead><tr><th>Country</th><th>Sales</th></tr></thead>
+          <tbody>
+            {% for row in summary.top_countries %}
+              <tr><td>{{ row.COUNTRY }}</td><td>{{ row.SALES | round(2) }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="forecast-card">
+      <h2>Forecast for next 6 months</h2>
+      <table>
+        <thead><tr><th>Period</th><th>Predicted Sales</th></tr></thead>
+        <tbody>
+          {% for row in summary.forecast_table %}
+            <tr><td>{{ row.period }}</td><td>{{ row.prediction | round(2) }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
