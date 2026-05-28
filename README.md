@@ -1,6 +1,9 @@
 # Predictive Sales Forecast
 
 A small sales forecasting project with a Flask frontend built on a sample sales dataset.
+<img width="1898" height="863" alt="image" src="https://github.com/user-attachments/assets/4ccafc17-f644-4507-9482-5bb1b38652d8" />
+<img width="1899" height="863" alt="image" src="https://github.com/user-attachments/assets/8ffb7ecd-6a61-4a05-a373-c811f0a703cb" />
+<img width="1892" height="868" alt="image" src="https://github.com/user-attachments/assets/97c07429-5130-44db-8005-4e9e3d5c4ab9" />
 
 ## What it includes
 
